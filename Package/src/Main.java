@@ -1,5 +1,5 @@
-package Package;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
@@ -12,7 +12,9 @@ public class Main {
 
 	private static void menu() {
 		
-		leerArchivo("Participantes (1).txt");
+		if (!leerArchivo("Participantes (1).txt")) {
+			return;
+		}
 		System.out.println("++++Conteo de gula++++"
 				+ "Personas que participan = "+ contador);
 		
@@ -23,27 +25,30 @@ public class Main {
 		
 	}
 
-	private static void leerArchivo(String string) {
+	private static boolean leerArchivo(String string) {
 		
 		File file=new File(string);
-		Scanner scanner=null;
-		try{
-			scanner=new Scanner(file);
-		}catch(Exception e) {
-			System.out.println("Error de lectura del archivo, revisar");
-			
-		}
-		
-		while(scanner.hasNextLine()) {
-			String Linea=scanner.nextLine();
-			String[] Partes=Linea.split(";");
-			
-			if(Partes.length>1) {
+		try (Scanner scanner = new Scanner(file)) {
+			while(scanner.hasNextLine()) {
+				String linea=scanner.nextLine();
+				String[] partes=linea.split(";");
 				
+				if(partes[0].trim().isEmpty()) {
+					System.out.println("Se omitió una línea sin nombre.");
+					continue;
+				}
+				if(contador >= listaPersona.length) {
+					System.out.println("Error: el archivo contiene más de "
+							+ listaPersona.length + " personas.");
+					return false;
+				}
+				llenarLista(partes);
 			}
-			llenarLista(Partes);
+		} catch(FileNotFoundException e) {
+			System.out.println("No se encontró el archivo: " + file.getAbsolutePath());
+			return false;
 		}
-	scanner.close();
+		return true;
 	}
 
 	private static void llenarLista(String[] partes) {

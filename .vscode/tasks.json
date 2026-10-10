@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar Java",
+            "type": "process",
+            "command": "javac",
+            "args": [
+                "--release",
+                "21",
+                "-d",
+                "${workspaceFolder}\\bin",
+                "${workspaceFolder}\\Package\\src\\Main.java",
+                "${workspaceFolder}\\Package\\src\\Persona.java",
+                "${workspaceFolder}\\Package\\src\\Alimento.java"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$javac",
+            "group": "build"
+        }
+    ]
+}
