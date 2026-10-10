@@ -1,16 +1,27 @@
 public class Alimento {
     private String tipoAlimento;
-    private String Persona Nombre;
-    private float largo;
-    private float ancho;
-    private float litros;
-    private String  fechaConsumo;
+    private Persona personaUno;
+    private float Largo;
+    private float Ancho;
+    private float Litros;
+    private String fechaConsumo;
 
-    public Alimento(String tipoAlimento, String Persona Nombre, String fechaConsumo) {
+    public Alimento(String tipoAlimento, Persona personauno, float largo, float ancho, String fechaConsumo) {
         this.tipoAlimento = tipoAlimento;
-        this.Persona Nombre = Persona Nombre;
+        this.personaUno = personauno;
+        this.Largo = largo;
+        this.Ancho = ancho;
+        this.fechaConsumo = fechaConsumo;
+        
+    }
+
+     public Alimento(String tipoAlimento,Persona personauno, float litros, String fechaConsumo) {
+        this.tipoAlimento = tipoAlimento;
+        this.personaUno = personauno;
+        this.Litros = litros;
         this.fechaConsumo = fechaConsumo;
     }
+
 
     
 
