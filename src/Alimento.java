@@ -22,8 +22,8 @@ public class Alimento {
         this.fechaConsumo = fechaConsumo;
     }
 
-    publoc String getTipoAlimento() {
-        return tipoAlimento;
+        public String getTipoAlimento() {
+            return tipoAlimento;
     }
 
 

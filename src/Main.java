@@ -10,7 +10,7 @@ public class Main {
 	}
 
 	private static void menu() {
-		// TODO Auto-generated method stub
+		
 		leerArchivo("Participantes (1).txt");
 		System.out.println("++++Conteo de gula++++"
 				+ "Personas que participan = "+ contador);
@@ -18,15 +18,12 @@ public class Main {
 		System.out.println();
 		System.out.println();
 
-		System.out.println("[1] Ver registros
-  					[2] Actualizar registros
-  					[3] Calcular metricas
-  					[4] Salir");
+		System.out.println("[1] Ver registros+2 Actualizar registros[3] Calcular metricas[4] Salir");
 		
 	}
 
 	private static void leerArchivo(String string) {
-		// TODO Auto-generated method stub
+		
 		File file=new File(string);
 		Scanner scanner=null;
 		try{
@@ -49,7 +46,7 @@ public class Main {
 	}
 
 	private static void llenarLista(String[] partes) {
-		// TODO Auto-generated method stub
+		
 		Persona nueva=new Persona(partes[0],null);
 		listaPersona[contador]=nueva;
 		

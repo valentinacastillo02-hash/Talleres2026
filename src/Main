@@ -17,6 +17,12 @@ public class Main {
 		
 		System.out.println();
 		System.out.println();
+
+		System.out.println("[1] Ver registros
+  					[2] Actualizar registros
+  					[3] Calcular metricas
+  					[4] Salir");
+		
 	}
 
 	private static void leerArchivo(String string) {
