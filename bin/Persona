@@ -1,0 +1,19 @@
+public class Persona {
+	private String nombrePersona;
+	private Alimento[] listaConsumidos;
+	public Persona(String nombrePersona, Alimento[] listaConsumidos) {
+		
+		this.nombrePersona = nombrePersona;
+		this.listaConsumidos = listaConsumidos;
+	}
+
+    public String getNombrePersona() {
+        return nombrePersona;
+    }
+    
+	
+	
+
+}
+
+
