@@ -1,0 +1,58 @@
+package package
+import java.io.File;
+import java.util.Scanner;
+
+public class Main {
+	
+	static public Persona[] listaPersona=new Persona[6];
+	static int contador=0;
+	public static void main(String[] args) {
+		menu();
+	}
+
+	private static void menu() {
+		
+		leerArchivo("Participantes (1).txt");
+		System.out.println("++++Conteo de gula++++"
+				+ "Personas que participan = "+ contador);
+		
+		System.out.println();
+		System.out.println();
+
+		System.out.println("[1] Ver registros+2 Actualizar registros[3] Calcular metricas[4] Salir");
+		
+	}
+
+	private static void leerArchivo(String string) {
+		
+		File file=new File(string);
+		Scanner scanner=null;
+		try{
+			scanner=new Scanner(file);
+		}catch(Exception e) {
+			System.out.println("Error de lectura del archivo, revisar");
+			
+		}
+		
+		while(scanner.hasNextLine()) {
+			String Linea=scanner.nextLine();
+			String[] Partes=Linea.split(";");
+			
+			if(Partes.length>1) {
+				
+			}
+			llenarLista(Partes);
+		}
+	scanner.close();
+	}
+
+	private static void llenarLista(String[] partes) {
+		
+		Persona nueva=new Persona(partes[0],null);
+		listaPersona[contador]=nueva;
+		
+		contador ++;
+		
+	}
+
+}
