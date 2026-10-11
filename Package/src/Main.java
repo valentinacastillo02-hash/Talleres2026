@@ -38,7 +38,7 @@ public class Main {
 		}catch(Exception e) {
 			System.out.println("Error al ingresar el dato");
 		}
-		while(4<opcion || opcion<0) {
+		while(4<opcion || opcion<1) {
 			System.out.print("Error.Intente de nuevo.");
 			try {
 				opcion=scanner.nextInt();
@@ -52,6 +52,7 @@ public class Main {
 				verRegistro();
 				break;
 			case 2:
+				actualizarRegistros();
 				break;
 			case 3:
 				break;
@@ -64,6 +65,92 @@ public class Main {
 				
 	}
 		
+	private static void actualizarRegistros() {
+		int opc=0;
+		do {
+		System.out.println("Cambiar registros.");
+		System.out.println();
+		System.out.println("[1] Agregar al registro permanente.\r\n"
+						 + "[2] Modificar un dato del registro permanente.\r\n"
+						  +"[3] Eliminar un dato del registro  permanente.\r\n"
+						  +"[4] Salir.\r\n");
+		System.out.println();
+		try {
+			opc=scanner.nextInt();
+		}catch(Exception e) {
+			System.out.println("Error al ingresar el dato");
+		}
+		while(4<opc || opc<1) {
+			System.out.print("Error.Intente de nuevo.");
+			try {
+				opc=scanner.nextInt();
+				System.out.println();
+				}catch(Exception e) {
+					System.out.println("Error al ingresar opcion /dato");
+					}
+			}
+			switch(opc) {
+			case 1:
+				agregarDato();
+				break;
+			case 2:
+				//modificarDato();
+				break;
+			case 3:
+				break;
+			case 4:
+				salir();
+				opc=0;
+				break;
+			}
+		}while(opc<1 || opc>4);
+	}
+
+	private static void agregarDato() {
+		// TODO Auto-generated method stub
+		int agreg=0;
+		
+		do {
+			System.out.println("Tipo de dato a Agregar:");
+			System.out.println();
+			System.out.println("[1] Choripan.\r\n"
+							 + "[2] Terremoto.\r\n"
+							  +"[3] Cancelar.\r\n"
+							  );
+			System.out.println();
+			try {
+				agreg=scanner.nextInt();
+			}catch(Exception e) {
+				System.out.println("Error al ingresar el dato");
+			}
+			while(3<agreg || agreg<1) {
+				System.out.print("Error.Intente de nuevo.");
+				try {
+					agreg=scanner.nextInt();
+					System.out.println();
+					}catch(Exception e) {
+						System.out.println("Error al ingresar opcion /dato");
+						}
+				}
+				switch(agreg) {
+				case 1:
+					agregarChoripan();
+					break;
+				case 2:
+					//modificarDato();
+					break;
+				case 3:
+					break;
+				}
+			}while(agreg<1 || agreg>3);
+		
+	}
+
+	private static void agregarChoripan() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private static boolean leerArchivoComida(String string) {
 		File file=new File(string);
 		try (Scanner scanner = new Scanner(file)) {
@@ -93,9 +180,11 @@ public class Main {
 		Persona comensal=new Persona(partes[1],null);
 		Alimento comida=null;
 		if (partes.length ==5) {
+		
 		comida=new Alimento(partes[0],comensal,Float.parseFloat(partes[2]),Float.parseFloat(partes[3]),partes[4]);
 		}
 		if(partes.length ==4) {
+			
 			comida=new Alimento(partes[0],comensal,Float.parseFloat(partes[2]),partes[3]);
 		}
 		listaAlimentos[contComida]=comida;
@@ -146,26 +235,55 @@ public class Main {
 	}
 
 	private static void terremoto() {
+		int conteoTerremoto=0;
+		float totalLitros=0;
+		System.out.println("Mostrando terremoto (Comensal,Litros,Fecha,Calorias): ");
+		String formato = "%-15s %-15s %-15s%n"; 
+		System.out.printf(formato,"Comensal","Litros","Calorias");
+		
+		for (int i = 0; i < contComida; i++) {
+			if(listaAlimentos[i] != null) {
+				int posicion=i+1;
+				
+				if(listaAlimentos[i].getTipoAlimento().equalsIgnoreCase("Terremoto")) {
+				System.out.print("["+posicion+"]  ");
+				System.out.printf(formato,listaAlimentos[i].getPersonaUno().getNombrePersona(),listaAlimentos[i].getLitros(),listaAlimentos[i].getFechaConsumo());
+				conteoTerremoto ++;
+				totalLitros+=listaAlimentos[i].getLitros();
+				}
+			}else {
+				System.out.println("Linea Vacia");
+			}	
+		}
+		System.out.println("Terremotos registrados: "+conteoTerremoto);
+		System.out.println("Total de litros registrados: "+totalLitros+"L");
+		System.out.println("++++++++++++++++");
 		
 		
 	}
 
 	private static void choripanes() {
-		System.out.println("Mostrando Choripanes (Comensal,Largo,Ancho,): ");
+		int conteoChoripanes=0;
+		System.out.println("Mostrando Choripanes (Comensal,Largo,Ancho,Fecha,Calorias): ");
 		String formato = "%-15s %-15s %-15s %-15s%n"; 
 		System.out.printf(formato,"Comensal","Largo","Ancho","Calorias");
+		
 		for (int i = 0; i < contComida; i++) {
 			if(listaAlimentos[i] != null) {
 				int posicion=i+1;
+				
+				if(listaAlimentos[i].getTipoAlimento().equalsIgnoreCase("Choripan")) {
 				System.out.print("["+posicion+"]  ");
-				System.out.printf(formato);
+				System.out.printf(formato,listaAlimentos[i].getPersonaUno().getNombrePersona(),listaAlimentos[i].getLargo(),listaAlimentos[i].getAncho(),listaAlimentos[i].getFechaConsumo());
+				conteoChoripanes++;
+				}
 			}else {
 				System.out.println("Linea Vacia");
-			}
-			
-			
-			
+			}	
 		}
+		System.out.println("Choripanes registrados: "+conteoChoripanes);
+		System.out.println("++++++++++++++++");
+		
 		
 	}
 
