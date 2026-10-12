@@ -1,5 +1,7 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -73,7 +75,7 @@ public class Main {
 		System.out.println("[1] Agregar al registro permanente.\r\n"
 						 + "[2] Modificar un dato del registro permanente.\r\n"
 						  +"[3] Eliminar un dato del registro  permanente.\r\n"
-						  +"[4] Salir.\r\n");
+						  +"[4] Volver al menú principal.\r\n");
 		System.out.println();
 		try {
 			opc=scanner.nextInt();
@@ -94,9 +96,10 @@ public class Main {
 				agregarDato();
 				break;
 			case 2:
-				//modificarDato();
+				modificarDato();
 				break;
 			case 3:
+				//EliminarDato
 				break;
 			case 4:
 				salir();
@@ -104,6 +107,11 @@ public class Main {
 				break;
 			}
 		}while(opc<1 || opc>4);
+	}
+
+	private static void modificarDato() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static void agregarDato() {
@@ -134,20 +142,134 @@ public class Main {
 				}
 				switch(agreg) {
 				case 1:
-					agregarChoripan();
+					sobreEscriubir("Choripan");
 					break;
+					
 				case 2:
-					//modificarDato();
+					sobreEscriubir("Terremoto");
 					break;
 				case 3:
+					//agreg=0;
 					break;
 				}
 			}while(agreg<1 || agreg>3);
 		
 	}
 
-	private static void agregarChoripan() {
-		// TODO Auto-generated method stub
+	private static void sobreEscriubir(String string) {
+		Alimento agregar=crearNuevoDato(string);
+		
+		try {
+			FileWriter filewrite=new FileWriter("Consumido.txt");
+			BufferedWriter cr=new BufferedWriter(filewrite);
+			for (int i = 0; i < contComida; i++) {
+				if(listaAlimentos[i].getTipoAlimento().equalsIgnoreCase("Terremoto")) {
+				cr.write(listaAlimentos[i].getTipoAlimento()+";"+listaAlimentos[i].getPersonaUno().getNombrePersona()+";"+listaAlimentos[i].getLitros()+";"+listaAlimentos[i].getFechaConsumo());
+				}
+				if(listaAlimentos[i].getTipoAlimento().equalsIgnoreCase("Choripan")) {
+					cr.write(listaAlimentos[i].getTipoAlimento()+";"+listaAlimentos[i].getPersonaUno().getNombrePersona()+";"+listaAlimentos[i].getLargo()+";"+listaAlimentos[i].getAncho()+";"+listaAlimentos[i].getFechaConsumo());
+					}
+				cr.newLine();
+			}
+			cr.close();
+		}catch(Exception e) {
+			System.out.println("Error.El Archivo txt no es compatible. ");
+		}
+		
+		
+	}
+
+	private static Alimento crearNuevoDato(String tAlimento) {
+		Alimento nuevo=null;
+		int persona=0;
+		String tipoComidaNueva=tAlimento;
+		Persona nombrePersona=null;
+		float Largo=0;
+		float Ancho=0;
+		float Litros=0;
+		String fechaConsumo=null;
+		int finalp=contador +1;
+			System.out.println("Consumidores: ");
+			System.out.println();
+			for (int i = 0; i < contador; i++) {
+				int posición=i+1;
+				System.out.print("["+posición+"]");
+				System.out.println(listaPersona[posición].getNombrePersona());
+				
+				System.out.println();
+			}
+				System.out.println("Señale al consumidor: ");
+				try {
+					persona=scanner.nextInt();
+					
+					
+				}catch(Exception e) {
+					System.out.println("Error al seleccionar el nombre.Formato  incorrecto.");
+				}
+				while(contador<persona || persona<1) {
+					try {
+						System.out.println("Valor invalido. Intente denuevo");
+						persona=scanner.nextInt();
+						
+					}catch(Exception e) {
+						System.out.println("Error al seleccionar el nombre.Formato  incorrecto.");
+					}
+					
+				}
+				persona--;
+				nombrePersona=listaPersona[persona];
+				if(tipoComidaNueva.equalsIgnoreCase("Choripan")) {
+				System.out.println("Escoja el Largo: ");
+				try {
+					Largo=scanner.nextFloat();
+				}catch(Exception e) {
+					System.out.println("Error. Ingrese dato decimal.");
+					}
+				System.out.println("Ingrese el ancho");
+				try {
+					Ancho=scanner.nextFloat();
+				}catch(Exception e) {
+					System.out.println("Error. Ingrese dato decimal.");
+					}
+				}
+				if(tipoComidaNueva.equalsIgnoreCase("Terremoto")) {
+					System.out.println("Ingrese la cantidad de litros");
+					try {						
+						Litros=scanner.nextFloat();
+					}catch(Exception e) {
+						System.out.println("Error. Ingrese dato decimal.");
+						}
+				}
+				System.out.println("Ingrese la fecha(YYYY-MM-DD):");
+				try {
+					fechaConsumo=scanner.nextLine();
+				}catch(Exception e) {
+					System.out.println("Error. Ingrese dato decimal.");
+					}
+				if(tipoComidaNueva.equalsIgnoreCase("Choripan")) {
+					nuevo=new Alimento(tipoComidaNueva,nombrePersona,Largo,Ancho,fechaConsumo,0);
+					return nuevo;
+					
+				}
+				if(tipoComidaNueva.equalsIgnoreCase("Terremoto")) {
+					nuevo=new Alimento(tipoComidaNueva,nombrePersona,Litros,fechaConsumo,0);
+					return nuevo;
+				}
+				
+				agregarLista(nuevo);
+				return null;
+			
+		
+	}
+
+	private static void agregarLista(Alimento nuevo) {
+		for (int i = 0; i < listaAlimentos.length; i++) {
+			if(listaAlimentos[i] ==null) {
+				listaAlimentos[i]=nuevo;
+				contComida++;
+				break;
+			}
+		}
 		
 	}
 
@@ -181,11 +303,11 @@ public class Main {
 		Alimento comida=null;
 		if (partes.length ==5) {
 		
-		comida=new Alimento(partes[0],comensal,Float.parseFloat(partes[2]),Float.parseFloat(partes[3]),partes[4]);
+		comida=new Alimento(partes[0],comensal,Float.parseFloat(partes[2]),Float.parseFloat(partes[3]),partes[4],0);
 		}
 		if(partes.length ==4) {
 			
-			comida=new Alimento(partes[0],comensal,Float.parseFloat(partes[2]),partes[3]);
+			comida=new Alimento(partes[0],comensal,Float.parseFloat(partes[2]),partes[3],0);
 		}
 		listaAlimentos[contComida]=comida;
 		
