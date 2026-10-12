@@ -2,6 +2,7 @@ package taller2;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.Iterator;
 
 public class GestorConsumo {
 	private Choripan[] choripanes;
@@ -94,7 +95,7 @@ public class GestorConsumo {
     	    System.out.println("=============================================");
     	} // Faltan los litros 
     
-   public  void sobreEscriubir(String string,Choripan chor,Terremoto ter) {
+   public  void sobreEscriubir(String string,boolean chor,boolean ter) {
 		int contador=0;
 		
 		try {
@@ -102,11 +103,11 @@ public class GestorConsumo {
 			FileWriter filewrite=new FileWriter("Consumido.txt");
 			BufferedWriter cr=new BufferedWriter(filewrite);
 			for (int i = 0; i < 200; i++) {
-				if(chor.getConsumidor() != null) {
+				if(chor) {
 					cr.write("Choripan"+";"+choripanes[i].getConsumidor()+";"+choripanes[i].getLargo()+";"+choripanes[i].getAncho()+";"+choripanes[i].getFecha());
 				}
 				
-			if(chor.getConsumidor() != null) {
+			if(!chor) {
 				contador=cantidadTerremotos;
 			}
 			cr.write("Terremoto"+";"+terremotos[i].getConsumidor()+";"+terremotos[i].getLitros()+";"+terremotos[i].getFecha());
@@ -121,6 +122,18 @@ public class GestorConsumo {
 		}
 		
    	}
+   public void mostrarEditar(int num) {
+	   String nombre=null;
+	   double largo=0;
+	   double ancho=0;
+	   String fecha=null;
+	   System.out.println("Registro seleccionado: "+choripanes[num].getChoripan()+"|"+choripanes[num].getConsumidor()+"|"+choripanes[num].getLargo()+"|"+choripanes[num].getAncho()+"|"+choripanes[num].getFecha());
+	   System.out.println("Deje el campo vacio para mantener el valor actual.");
+	   
+	   
+   }
+  
+   
    }
 	
     
