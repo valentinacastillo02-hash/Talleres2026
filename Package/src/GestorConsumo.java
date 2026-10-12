@@ -1,11 +1,16 @@
 package taller2;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 public class GestorConsumo {
 	private Choripan[] choripanes;
     private Terremoto[] terremotos;
 
     private int cantidadChoripanes;
     private int cantidadTerremotos;
+   
+   
 
     public GestorConsumo() {
         choripanes = new Choripan[200];
@@ -15,7 +20,9 @@ public class GestorConsumo {
         cantidadTerremotos = 0;
     }
     
+    
     public boolean agregarChoripan(Choripan choripan) {
+    	 
         if (cantidadChoripanes < 200) {
             choripanes[cantidadChoripanes] = choripan;
             cantidadChoripanes++;
@@ -87,6 +94,36 @@ public class GestorConsumo {
     	    System.out.println("=============================================");
     	} // Faltan los litros 
     
-}
+   public  void sobreEscriubir(String string,Choripan chor,Terremoto ter) {
+		int contador=0;
+		
+		try {
+			
+			FileWriter filewrite=new FileWriter("Consumido.txt");
+			BufferedWriter cr=new BufferedWriter(filewrite);
+			for (int i = 0; i < 200; i++) {
+				if(chor.getConsumidor() != null) {
+					cr.write("Choripan"+";"+choripanes[i].getConsumidor()+";"+choripanes[i].getLargo()+";"+choripanes[i].getAncho()+";"+choripanes[i].getFecha());
+				}
+				
+			if(chor.getConsumidor() != null) {
+				contador=cantidadTerremotos;
+			}
+			cr.write("Terremoto"+";"+terremotos[i].getConsumidor()+";"+terremotos[i].getLitros()+";"+terremotos[i].getFecha());
+					}
+				cr.newLine();
+				
+   			
+		
+			cr.close();
+		}catch(Exception e) {
+			System.out.println("Error.El Archivo txt no es compatible. ");
+		}
+		
+   	}
+   }
+	
+    
+
 
 
