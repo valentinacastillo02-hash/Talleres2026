@@ -117,27 +117,46 @@ public class taller_2 {
     	
     }
     public static void editarChoripan (Scanner teclado) {
-    	int num;
+    	int num=0;
     	
     	gestor.mostrarChoripanes();
     	
 	    System.out.print("Seleccione el registro a editar (0 para cancelar): ");
-	    num = teclado.nextInt();
+	    System.out.println(); 
+	    try {
+	    num = teclado.nextInt();	
+	    }catch(Exception e) {
+	    	System.out.println("Formato no permitido");
+	    }
+	    if(num==0) {
+	    	
+	    }else {
+	    	num=num-1;
+	    }
+	    	
+	   
+	    gestor.mostrarEditar(num);
+	   
+		
+	    
     	
     	
     }
     
     
     public static void editarRegistro (Scanner teclado) {
-    	int opcion;
+    	int opcion=0;
     	System.out.println("Tipo de registro a editar:");
     	System.out.println("[1] Choripan");
     	System.out.println("[2] Terremoto");
     	System.out.println("[3] Cancelar");
     	
     	System.out.print("Seleccione una opcion: ");
+    	try {
 	    opcion  = teclado.nextInt();
-	    
+    	}catch(Exception e) {
+    		System.out.println("Formato no admitido.");
+    	}
 	    switch (opcion) {
 	    case 1:
 	    	 editarChoripan(teclado);
@@ -159,10 +178,10 @@ public class taller_2 {
     
     
     public static void agregarTerremoto (Scanner teclado) {
-    	String consumidor;
-    	int opcionConsumidor;
-    	double litros;
-    	String fecha;
+    	String consumidor=null;
+    	int opcionConsumidor=0;
+    	double litros=0;
+    	String fecha=null;
     	
     	System.out.println();
  	    System.out.println("Seleccione un consumidor:");
@@ -171,23 +190,36 @@ public class taller_2 {
  	        System.out.println("[" + (i + 1) + "] " + nombreParticipantes[i]);
  	    }
  	   System.out.print("Ingrese una opcion: ");
-	    opcionConsumidor = teclado.nextInt();
+ 	  try {
+	    	opcionConsumidor = teclado.nextInt();
+	    }catch(Exception e) {
+	    	System.out.println("Error del formato ingresado.");
+	    }
 	    
 	    consumidor = nombreParticipantes[opcionConsumidor - 1];
 	    
 	    System.out.println("Litros de terremoto (L): ");
+	    try {
 	    litros = teclado.nextDouble();
-	    
+	    }catch(Exception e) {
+	    	System.out.println("Formato no permotido.");
+	    }
 	    teclado.nextLine(); 
 	    System.out.println("Fecha (YYYY-MM-DD): ");
-	    fecha  = teclado.nextLine();
+	    try {
+	    	fecha  = teclado.nextLine();
+	    }catch(Exception e) {
+	    	System.out.println("Error. El formato no es correcto");
+	    }
 	   
 	    Terremoto nuevo = new Terremoto (consumidor,fecha,litros);
 	    gestor.agregarTerremoto(nuevo);
 	    
 	    System.out.println(">> Registro agregado correctamente y guardado en Consumido.txt");
 	    System.out.println("Terremoto | " + consumidor +"|"+ litros +"|" + fecha);
-    	
+	    boolean choripan=false;
+	    boolean terremoto=true;
+	    gestor.sobreEscriubir("Consumido.txt",choripan,terremoto);
 	    // Falta validar datos 
     }
     public static void agregarChoripan (Scanner teclado) {
@@ -243,12 +275,15 @@ public class taller_2 {
 	    
 	    Choripan nuevo = new Choripan(consumidor, fecha, largo, ancho);
 	    gestor.agregarChoripan(nuevo);
+	   
 	    
 	    
 	    System.out.println(">> Registro agregado correctamente y guardado en Consumido.txt");
 	    System.out.println("Choripan | " + consumidor + "|"+ largo + " cm x"+ ancho +  " cm |" + fecha);
 	    //Falta mostar las calorias 
-	    gestor.sobreEscriubir("Consumido.txt",nuevo,null);
+	    boolean choripan=true;
+	    boolean terremoto=false;
+	    gestor.sobreEscriubir("Consumido.txt",choripan,terremoto);
 	    
     }
     
@@ -452,4 +487,3 @@ public static void leerConsumidos() {
 	    System.out.println(cantidadParticipantes + " participantes cargados.");
 	}
 }
-
