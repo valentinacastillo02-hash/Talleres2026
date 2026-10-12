@@ -1,9 +1,13 @@
 
 package taller2;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
+
+
 
 public class taller_2 {
 	static GestorConsumo gestor = new GestorConsumo();
@@ -26,7 +30,7 @@ public class taller_2 {
 
     public static void menu() {
         Scanner teclado = new Scanner(System.in);
-        int opcion;
+        int opcion=0;
 
         do {
             System.out.println("BIENVENIDO A LA FONDA DEL PAPU");
@@ -37,8 +41,11 @@ public class taller_2 {
             System.out.print("Seleccione una opcion: ");
 
             if (teclado.hasNextInt()) {
+            	try {
                 opcion = teclado.nextInt();
-
+            	}catch(Exception e) {
+            		System.out.println("Opción inválida");
+            	}
                 switch (opcion) {
                     case 1:
                         verRegistros(teclado);
@@ -184,11 +191,11 @@ public class taller_2 {
 	    // Falta validar datos 
     }
     public static void agregarChoripan (Scanner teclado) {
-    	  String consumidor;
-    	    int opcionConsumidor;
-    	    double largo;
-    	    double ancho;
-    	    String fecha;
+    	  String consumidor=null;
+    	  int opcionConsumidor=0;
+    	  double largo=0;
+    	  double ancho=0;
+    	  String fecha=null;
     	    
 
     	    System.out.println();
@@ -199,18 +206,40 @@ public class taller_2 {
     	    }
     	    
     	    System.out.print("Ingrese una opcion: ");
-    	    opcionConsumidor = teclado.nextInt();
-    	// falta validar datos
+    	    try {
+    	    	opcionConsumidor = teclado.nextInt();
+    	    }catch(Exception e) {
+    	    	System.out.println("Error del formato ingresado.");
+    	    }
+    	    
+    	
 	    consumidor = nombreParticipantes[opcionConsumidor - 1];
 	    //Agregar al nuevo choripan
 	    
 	    System.out.println("Largo del choripan (cm): ");
-	    largo = teclado.nextDouble();
+	    try {
+	    	largo = teclado.nextDouble();
+	    }catch(Exception e) {
+	    	System.out.println("Error. El formato no es correcto");
+	    }
+	    
 	    System.out.println("ancho del choripan(cm): ");
-	    ancho = teclado.nextDouble();
-	    teclado.nextLine(); 
+	    
+	    try {
+	    	ancho = teclado.nextDouble();
+	    }catch(Exception e) {
+	    	System.out.println("Error. El formato no es correcto");
+	    }
+	    //teclado.nextLine(); esto aquí no corresponde,no? 
+	    
 	    System.out.println("Fecha (YYYY-MM-DD): ");
-	    fecha  = teclado.nextLine();
+	    teclado.nextLine();
+	    try {
+	    	fecha  = teclado.nextLine();
+	    }catch(Exception e) {
+	    	System.out.println("Error. El formato no es correcto");
+	    }
+	    
 	    
 	    Choripan nuevo = new Choripan(consumidor, fecha, largo, ancho);
 	    gestor.agregarChoripan(nuevo);
@@ -219,11 +248,13 @@ public class taller_2 {
 	    System.out.println(">> Registro agregado correctamente y guardado en Consumido.txt");
 	    System.out.println("Choripan | " + consumidor + "|"+ largo + " cm x"+ ancho +  " cm |" + fecha);
 	    //Falta mostar las calorias 
+	    gestor.sobreEscriubir("Consumido.txt",nuevo,null);
 	    
     }
     
+    
     public static void agregarRegistro (Scanner teclado) {
-    	int eleccion;
+    	int eleccion=0;
    
     	System.out.println("Tipo de registro: ");
     	System.out.println("[1] Choripan");
@@ -231,7 +262,11 @@ public class taller_2 {
     	System.out.println("[3] Cancelar");
     	
      	System.out.print("Seleccione una opcion: ");
-	    eleccion = teclado.nextInt();
+     	try {
+     		eleccion = teclado.nextInt();
+     	}catch(Exception e){
+     		System.out.println("Error al ingresar el formato del dato");
+     	}
 	    
 	    switch (eleccion) {
         case 1:
@@ -254,7 +289,7 @@ public class taller_2 {
     }
     
     public static void actualizarRegistros (Scanner teclado) {
-    	int opcion;
+    	int opcion=0;
     	System.out.println("============ ACTUALIZAR REGISTROS =================");
     	System.out.println("[1] Agregar");
     	System.out.println("[2] Editar");
@@ -263,8 +298,11 @@ public class taller_2 {
     	System.out.println("============================================");
     	
 	   	System.out.print("Seleccione una opcion: ");
+	   	try {
 	    opcion = teclado.nextInt();
-	    
+	   	}catch(Exception e) {
+	   		System.out.println("");
+	   	}
 	    switch (opcion) {
 	        case 1:
 	        	 agregarRegistro(teclado);
@@ -286,7 +324,7 @@ public class taller_2 {
     
     
     public static void verRegistros (Scanner teclado) {
-    	int opcion;
+    	int opcion=0;
     	
     	System.out.println("============ VER REGISTROS =================");
     	System.out.println("[1] Choripanes");
@@ -295,8 +333,11 @@ public class taller_2 {
     	System.out.println("============================================");
     	
     	 System.out.print("Seleccione una opcion: ");
+    	 try {
 	     opcion = teclado.nextInt();
-	     
+    	 }catch(Exception e) {
+    		 System.out.println("Fallo.Formato ingresado no válido. ");
+    	 }
 	     switch (opcion) {
 	     case 1:
 	    	    gestor.mostrarChoripanes();
@@ -411,3 +452,4 @@ public static void leerConsumidos() {
 	    System.out.println(cantidadParticipantes + " participantes cargados.");
 	}
 }
+
