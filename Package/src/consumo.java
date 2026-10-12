@@ -20,6 +20,7 @@ public abstract class consumo {
 	
 	 // clases hijas 
 	public abstract void Mostar(); {
+		//Esto se ve mas como clases de una interfase. No se debía ocupar herencia
 		
 	}
 	
