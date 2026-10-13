@@ -3,6 +3,7 @@ package taller2;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class GestorConsumo {
 	private Choripan[] choripanes;
@@ -122,17 +123,145 @@ public class GestorConsumo {
 		}
 		
    	}
-   public void mostrarEditar(int num) {
+   public void mostrarEditar(int num,boolean chor, boolean terr) {
+	   Scanner sca=new Scanner(System.in);
 	   String nombre=null;
 	   double largo=0;
 	   double ancho=0;
 	   String fecha=null;
-	   System.out.println("Registro seleccionado: "+choripanes[num].getChoripan()+"|"+choripanes[num].getConsumidor()+"|"+choripanes[num].getLargo()+"|"+choripanes[num].getAncho()+"|"+choripanes[num].getFecha());
+	   double litros=0;
+	   if(chor) {
+	   System.out.println("Registro seleccionado: |"+choripanes[num].getConsumidor()+"|"+choripanes[num].getLargo()+"|"+choripanes[num].getAncho()+"|"+choripanes[num].getFecha());
 	   System.out.println("Deje el campo vacio para mantener el valor actual.");
 	   
+	   boolean llenada=false;
 	   
-   }
-  
+	   System.out.println("Consumidor Ingrese nuevo nombre: ");
+	   try {
+		   
+		   nombre=sca.nextLine();
+		   
+	   }catch(Exception e) {
+		   System.out.println("Error. Se trinen que ingresar un palabra nombre");
+	   }
+	   if(nombre !=null) {
+		   llenada =true;
+		   if(llenada) {
+			   choripanes[num].setConsumidor(nombre);
+			   
+		   }   
+	   }
+	   System.out.println("Largo. Ingrese nuevo Largo: ");
+	   try {
+		   
+		   largo=sca.nextDouble();
+		   
+	   }catch(Exception e) {
+		   System.out.println("Error. Se tiene que ingresar un número");
+	   }
+	   if(largo!= 0) {
+		   llenada =true;
+		   if(llenada) {
+			   choripanes[num].setLargo(largo);
+		   }
+	   }
+	   System.out.println("Ancho. Ingrese nuevo Ancho: ");
+	   try {
+		   
+		   ancho=sca.nextDouble();
+		   
+	   }catch(Exception e) {
+		   System.out.println("Error. Se tiene que ingresar un número");
+	   }
+	   if(ancho!= 0) {
+		   llenada =true;
+		   if(llenada) {
+			   choripanes[num].setAncho(largo);
+		   }
+	   }
+	   
+	   System.out.println("Fecha. Ingrese nuevo Fecha( (YYYY-MM-DD)): ");
+	   try {
+		   
+		   fecha=sca.nextLine();
+		   
+	   }catch(Exception e) {
+		   System.out.println("Error. Se tiene que ingresar de manera correcta.");
+	   }
+	   if(ancho!= 0) {
+		   llenada =true;
+		   if(llenada) {
+			   choripanes[num].setFecha(fecha);
+		   }
+	   }
+	   
+	   if(!llenada) {
+		   System.out.println("Se matiene igual los datos");
+	   			}else {
+	   				System.out.println("Registro Actualizado: Choripan|"+choripanes[num].getConsumidor()+"|"+choripanes[num].getLargo()+"|"+choripanes[num].getAncho()+"|"+choripanes[num].getFecha());
+	   			}
+	   
+	   	}else {
+	   		System.out.println("Registro seleccionado: "+terremotos[num].getConsumidor()+"|"+choripanes[num].getConsumidor()+"|"+terremotos[num].getLitros()+"|"+terremotos[num].getFecha());
+	 	   System.out.println("Deje el campo vacio para mantener el valor actual.");
+	 	   
+	 	   boolean llenada=false;
+	 	   
+	 	   System.out.println("Consumidor Ingrese nuevo nombre: ");
+	 	   try {
+	 		   
+	 		   nombre=sca.nextLine();
+	 		   
+	 	   }catch(Exception e) {
+	 		   System.out.println("Error. Se trinen que ingresar un palabra nombre");
+	 	   }
+	 	   if(nombre !=null) {
+	 		   llenada =true;
+	 		   if(llenada) {
+	 			  terremotos[num].setConsumidor(nombre);
+	 			   
+	 		   }   
+	 	   }
+	 	   System.out.println("Litros. Ingrese nuevo Litros: ");
+	 	   try {
+	 		   
+	 		  litros=sca.nextDouble();
+	 		   
+	 	   }catch(Exception e) {
+	 		   System.out.println("Error. Se tiene que ingresar un número");
+	 	   }
+	 	   if(largo!= 0) {
+	 		   llenada =true;
+	 		   if(llenada) {
+	 			  terremotos[num].setLitros(litros);;
+	 		   }
+	 	   }
+	 	   
+	 	   
+	 	   System.out.println("Fecha. Ingrese nuevo Fecha( (YYYY-MM-DD)): ");
+	 	   try {
+	 		   
+	 		   fecha=sca.nextLine();
+	 		   
+	 	   }catch(Exception e) {
+	 		   System.out.println("Error. Se tiene que ingresar de manera correcta.");
+	 	   }
+	 	   if(ancho!= 0) {
+	 		   llenada =true;
+	 		   if(llenada) {
+	 			  terremotos[num].setFecha(fecha);
+	 		   }
+	 	   }
+	 	   
+	 	   if(!llenada) {
+	 		   System.out.println("Se matiene igual los datos");
+	 	   			}else {
+	 	   				System.out.println("Registro Actualizado: Terremoto| "+terremotos[num].getConsumidor()+"|"+choripanes[num].getConsumidor()+"|"+terremotos[num].getLitros()+"|"+terremotos[num].getFecha());
+	 	   			}
+		   
+	   		}
+	   
+   		}
    
    }
 	
