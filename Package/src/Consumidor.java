@@ -92,6 +92,10 @@ public class Consumidor {
 		System.out.printf(format,this.nombre,cantTerr);
 		
 	}
+
+	public void calPerPersona(Consumidor cons) {
+		
+	}
 	
 	
 	
