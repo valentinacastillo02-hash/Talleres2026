@@ -1,13 +1,15 @@
 package taller2;
 
 public class Terremoto {
+	private String Producto;
 	private double litros;
 	private String fecha;
 	private String consumidor;
 
     // Constructor
-    public Terremoto(String consumidor, String fecha,double litros) {
-        this.consumidor = consumidor;
+    public Terremoto(String producto,String consumidor, String fecha,double litros) {
+        this.Producto="Terremoto";
+    	this.consumidor = consumidor;
         this.fecha = fecha;
         this.litros = litros;
     }
@@ -33,4 +35,14 @@ public class Terremoto {
     public double calcularKcal(){
     	return (litros * 10) / 3.0;
     }
+	public String getProducto() {
+		return Producto;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+	public void setConsumidor(String consumidor) {
+		this.consumidor = consumidor;
+	}
+    
 }
