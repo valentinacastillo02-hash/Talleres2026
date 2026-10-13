@@ -55,7 +55,7 @@ public class taller_2 {
                         break;
 
                     case 3:
-                        // Calcular metricas
+                        calcularmetricas(teclado);
                         break;
 
                     case 4:
@@ -83,7 +83,60 @@ public class taller_2 {
     }
     
     
-    public static void eliminarRegistro (Scanner teclado) {
+    public static void calcularmetricas(Scanner teclado) {
+		int num=0;
+    	do {
+    	System.out.println("============ CALCULAR METRICAS =============\r\n"
+				+ "  [1] Choripanes comidos en total\r\n"
+				+ "  [2] Terremotos tomados en total\r\n"
+				+ "  [3] Choripanes comidos por usuario\r\n"
+				+ "  [4] Terremotos tomados por usuario\r\n"
+				+ "  [5] KCal consumidas por usuario\r\n"
+				+ "  [6] Dias ebrio por usuario\r\n"
+				+ "  [7] Volver al menu principal\r\n"
+				+ "============================================");
+    	System.out.println();
+    	System.out.print("Ingrese opcion: ");
+    	try {
+    		
+    		num=teclado.nextInt();
+    	}catch(Exception e) {
+    		System.out.println("Error");
+    	}
+    	switch(num) {
+    	case 1:
+    		choripanesComidos();
+    		break;
+    	
+    	case 2:
+    		terremotosTomados();
+    		break;
+    	case 3:
+    		choripanesPorUsuario();
+    		break;
+    		}
+		}while(num!=7) ;
+			
+		
+		
+	}
+
+	public static void choripanesPorUsuario() {
+		// Crear clase Persona para mejorar la velocidad.
+		
+	}
+
+	public static void terremotosTomados() {
+		gestor.getcantTerremotos();
+		
+	}
+
+	public static void choripanesComidos() {
+		gestor.getcantChoripanes();
+		
+	}
+
+	public static void eliminarRegistro (Scanner teclado) {
     	int opcion;
     	System.out.println("Tipo de registro a eliminar:");
     	System.out.println("[1] Choripan");
@@ -95,10 +148,10 @@ public class taller_2 {
 	    
 	    switch (opcion) {
 	    case 1:
-	    	 eliminarChoripan();
+	    	 eliminarChoripan(teclado);
 	    	break;
 	    case 2:
-	    	 // Eliminar terremoto
+	    	 eliminarterremoto(teclado);
 	    	break;
 	    case 3:
             System.out.println("Saliendo...");
@@ -113,10 +166,43 @@ public class taller_2 {
 	   
     }
     
-    public static void eliminarChoripan() {
-		gestor.mostrarChoripanes();
+    public static void eliminarterremoto(Scanner teclado) {
+    	int num=0;
+    	gestor.mostrarTerremotos();
 		System.out.println("Seleccione el registro a eliminar (0 para cancelar): ");
 		System.out.println();
+		
+		try {
+		    num = teclado.nextInt();	
+		    }catch(Exception e) {
+		    	System.out.println("Formato no permitido");
+		    }
+		    if(num==0) {
+		    	
+		    }else {
+		    	num=num-1;
+		    }
+		    gestor.eliminarterremoto(num);
+		
+	}
+
+	public static void eliminarChoripan(Scanner teclado) {
+    	int num=0;
+    	gestor.mostrarChoripanes();
+		System.out.println("Seleccione el registro a eliminar (0 para cancelar): ");
+		System.out.println();
+		
+		try {
+		    num = teclado.nextInt();	
+		    }catch(Exception e) {
+		    	System.out.println("Formato no permitido");
+		    }
+		    if(num==0) {
+		    	
+		    }else {
+		    	num=num-1;
+		    }
+		    gestor.eliminarChoripan(num);
 		
 	}
 
@@ -137,10 +223,13 @@ public class taller_2 {
 	    	
 	    }else {
 	    	num=num-1;
+	    	gestor.mostrarEditar(num,choripan,terremoto);
 	    }
+	    
+	    
 	    	
 	   
-	    gestor.mostrarEditar(num,choripan,terremoto);
+	    
     	
     }
     public static void editarChoripan (Scanner teclado) {
