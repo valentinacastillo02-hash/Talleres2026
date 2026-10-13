@@ -95,7 +95,7 @@ public class taller_2 {
 	    
 	    switch (opcion) {
 	    case 1:
-	    	 // eliminar choripan
+	    	 eliminarChoripan();
 	    	break;
 	    case 2:
 	    	 // Eliminar terremoto
@@ -113,12 +113,40 @@ public class taller_2 {
 	   
     }
     
-    public static void editarTerremoto (Scanner teclado) {
+    public static void eliminarChoripan() {
+		gestor.mostrarChoripanes();
+		System.out.println("Seleccione el registro a eliminar (0 para cancelar): ");
+		System.out.println();
+		
+	}
+
+	public static void editarTerremoto (Scanner teclado) {
+    	int num=0;
+    	boolean choripan=false;
+    	boolean terremoto=true;
+    	gestor.mostrarTerremotos();
+    	
+	    System.out.print("Seleccione el registro a editar (0 para cancelar): ");
+	    System.out.println(); 
+	    try {
+	    num = teclado.nextInt();	
+	    }catch(Exception e) {
+	    	System.out.println("Formato no permitido");
+	    }
+	    if(num==0) {
+	    	
+	    }else {
+	    	num=num-1;
+	    }
+	    	
+	   
+	    gestor.mostrarEditar(num,choripan,terremoto);
     	
     }
     public static void editarChoripan (Scanner teclado) {
     	int num=0;
-    	
+    	boolean choripan=true;
+    	boolean terremoto=false;
     	gestor.mostrarChoripanes();
     	
 	    System.out.print("Seleccione el registro a editar (0 para cancelar): ");
@@ -135,11 +163,7 @@ public class taller_2 {
 	    }
 	    	
 	   
-	    gestor.mostrarEditar(num);
-	   
-		
-	    
-    	
+	    gestor.mostrarEditar(num,choripan,terremoto);
     	
     }
     
@@ -178,6 +202,7 @@ public class taller_2 {
     
     
     public static void agregarTerremoto (Scanner teclado) {
+    	String comida="Terremoto";
     	String consumidor=null;
     	int opcionConsumidor=0;
     	double litros=0;
@@ -212,7 +237,7 @@ public class taller_2 {
 	    	System.out.println("Error. El formato no es correcto");
 	    }
 	   
-	    Terremoto nuevo = new Terremoto (consumidor,fecha,litros);
+	    Terremoto nuevo = new Terremoto (comida,consumidor,fecha,litros);
 	    gestor.agregarTerremoto(nuevo);
 	    
 	    System.out.println(">> Registro agregado correctamente y guardado en Consumido.txt");
@@ -409,13 +434,13 @@ public static void leerConsumidos() {
             try {
                 if (datos[0].equalsIgnoreCase("Terremoto")
                         && datos.length == 4) {
-
+                	String tip=datos[0];
                     String consumidor = datos[1];
                     double litros = Double.parseDouble(datos[2]);
                     String fecha = datos[3];
 
                     Terremoto terremoto =
-                            new Terremoto(consumidor, fecha, litros);
+                            new Terremoto(tip,consumidor, fecha, litros);
 
                     if (!gestor.agregarTerremoto(terremoto)) {
                         System.out.println(
