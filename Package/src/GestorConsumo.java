@@ -131,7 +131,7 @@ public class GestorConsumo {
 	   String fecha=null;
 	   double litros=0;
 	   if(chor) {
-	   System.out.println("Registro seleccionado: |"+choripanes[num].getConsumidor()+"|"+choripanes[num].getLargo()+"|"+choripanes[num].getAncho()+"|"+choripanes[num].getFecha());
+	   System.out.println("Registro seleccionado: Choripanes|"+choripanes[num].getConsumidor()+"|"+choripanes[num].getLargo()+"|"+choripanes[num].getAncho()+"|"+choripanes[num].getFecha());
 	   System.out.println("Deje el campo vacio para mantener el valor actual.");
 	   
 	   boolean llenada=false;
@@ -262,10 +262,55 @@ public class GestorConsumo {
 	   		}
 	   
    		}
+
+
+   public void eliminarChoripan(int num) {
+	   System.out.println("Confirma la eliminacion: "+choripanes[num].getChoripan()+"|"+choripanes[num].getConsumidor()+"|"+choripanes[num].getLargo()+"|"+choripanes[num].getAncho()+"|"+choripanes[num].getFecha());
+	   boolean chor=true;
+	   boolean ter=false;
+	   choripanes[num]=null;
+	   
+	   for (int i = num; i < choripanes.length; i++) {
+		   if(choripanes[num+1] !=null ) {
+			   choripanes[num]=choripanes[num+1];
+		   }
+		   cantidadChoripanes--;
+	   		}
+	   sobreEscriubir("Consumido",chor,ter);
+	   System.out.println("Registro eliminado correctamente. Cambios guardados en Consumido.txt");
+   		}
+
+
+   public void eliminarterremoto(int num) {
+	   System.out.println("Registro seleccionado:"+terremotos[num].getProducto()+"|"+terremotos[num].getConsumidor()+"|"+choripanes[num].getConsumidor()+"|"+terremotos[num].getLitros()+"|"+terremotos[num].getFecha());
+	   boolean chor=false;
+	   boolean ter=true;
+	   terremotos[num]=null;
+	   
+	   
+	   for (int i = num; i < terremotos.length; i++) {
+		   if(terremotos[num+1] !=null ) {
+			   terremotos[num]=terremotos[num+1];
+		   }
+		   cantidadTerremotos--;
+	   		}
+	   sobreEscriubir("Consumido",chor,ter);
+	   System.out.println("Registro eliminado correctamente. Cambios guardados en Consumido.txt");
+	
+   		}
+
+
+   public void getcantChoripanes() {
+	System.out.println("La cantidad total de choripanes son "+cantidadChoripanes);
+	
+   }
+
+
+   public void getcantTerremotos() {
+	   System.out.println("La cantidad total de Terremotos son "+cantidadTerremotos);
+	
+   		}
    
    }
 	
-    
-
-
 
