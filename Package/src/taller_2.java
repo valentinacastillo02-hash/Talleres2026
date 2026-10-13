@@ -137,7 +137,16 @@ public class taller_2 {
 	}
 
 	public static void kcalPorUsuario() {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < cantidadParticipantes; i++) {
+			String nombreBuscado=nombreParticipantes[i];
+			Choripan[] chor=new Choripan[200];
+			Terremoto[] terremoto=new Terremoto[200];
+			if(!nombreBuscado.equalsIgnoreCase(null)) {
+				Consumidor cons=new Consumidor(nombreBuscado,chor,terremoto);
+				cons.calPerPersona(cons);
+			}
+			
+		}
 		
 	}
 
