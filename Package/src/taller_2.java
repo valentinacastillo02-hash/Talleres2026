@@ -114,15 +114,93 @@ public class taller_2 {
     	case 3:
     		choripanesPorUsuario();
     		break;
-    		}
+    	case 4:
+    		terremotosPorUsuario();
+    		break;
+    		
+    	case 5:
+    		kcalPorUsuario();
+    		break;
+    	case 6:
+    		diasEbrioUsuario();
+    		break;
+    	}	
 		}while(num!=7) ;
 			
 		
 		
 	}
 
+	public static void diasEbrioUsuario() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void kcalPorUsuario() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void terremotosPorUsuario() {
+		// TODO Auto-generated method stub
+		Consumidor cons=null;
+		
+		System.out.println("Terremotos por usuario:");
+		System.out.println();
+		String format="%-15s %-15s %n"; 
+		System.out.println();
+		System.out.printf(format,"Usuario","Cantidad");
+		int participantes=nombreParticipantes.length;
+		for(int i=0; i<participantes;i++) {
+			
+				Choripan[] chor=new Choripan[200];
+				Terremoto[] ter=new Terremoto[200];
+				String nombres=nombreParticipantes[i];
+				//Este no funciona, por favor revisar
+				if(!nombres.isEmpty() )  {
+				cons=new Consumidor(nombres,chor,ter);
+				try {
+					cons.getCanPersonaTerremoto();
+				} catch (Exception e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			  
+			
+			}
+		}
+		
+		
+	}
+
 	public static void choripanesPorUsuario() {
 		// Crear clase Persona para mejorar la velocidad.
+		Consumidor cons=null;
+		
+		System.out.println("Choripanes por usuario:");
+		System.out.println();
+		String format="%-15s %-15s %n"; 
+		System.out.println();
+		System.out.printf(format,"Usuario","Cantidad");
+		int participantes=nombreParticipantes.length;
+		for(int i=0; i<participantes;i++) {
+			
+				Choripan[] chor=new Choripan[200];
+				Terremoto[] ter=new Terremoto[200];
+				String nombres=nombreParticipantes[i];
+				//Este no funciona, por favor revisar
+				if(!nombres.isEmpty() )  {
+				cons=new Consumidor(nombres,chor,ter);
+				try {
+					cons.getCanPersonaChoripan();
+				} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			  
+			
+			}
+		}
 		
 	}
 
@@ -387,7 +465,7 @@ public class taller_2 {
 	    }
 	    
 	    
-	    Choripan nuevo = new Choripan(consumidor, fecha, largo, ancho);
+	    Choripan nuevo = new Choripan("Choripan",consumidor, fecha, largo, ancho);
 	    gestor.agregarChoripan(nuevo);
 	   
 	    
@@ -546,7 +624,7 @@ public static void leerConsumidos() {
                     String fecha = datos[4];
 
                     Choripan choripan =
-                            new Choripan(consumidor, fecha, largo, ancho);
+                            new Choripan("Choripan",consumidor, fecha, largo, ancho);
 
                     if (!gestor.agregarChoripan(choripan)) {
                         System.out.println(
