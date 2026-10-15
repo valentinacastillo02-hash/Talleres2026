@@ -1,4 +1,4 @@
-//Nombre1 Apellido1 - 21.000.000-K - ICCI
+//Ignacia Fica - 21.799.663.6 - ICCI
 //Valentina Castillo - 15.166.692-2 - ITI
 package taller2;
 
