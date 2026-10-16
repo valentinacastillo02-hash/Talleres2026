@@ -6,16 +6,18 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
 
 public class taller_2 {
+	static private Consumidor[] listaConsumidor=new Consumidor[200];
 	static GestorConsumo gestor = new GestorConsumo();
 
     static String[] nombreParticipantes = new String[200];
     static int cantidadParticipantes = 0;
-    
+    static Scanner teclado = new Scanner(System.in);;
     
 
     public static void main(String[] args) {
@@ -30,8 +32,9 @@ public class taller_2 {
     }
 
     public static void menu() {
-        Scanner teclado = new Scanner(System.in);
+        
         int opcion=0;
+        String aux=null;
 
         do {
             System.out.println("BIENVENIDO A LA FONDA DEL PAPU");
@@ -43,9 +46,15 @@ public class taller_2 {
 
             if (teclado.hasNextInt()) {
             	try {
-                opcion = teclado.nextInt();
-            	}catch(Exception e) {
+            		aux = teclado.nextLine();
+            		opcion=Integer.parseInt(aux);
+            		teclado.nextLine();
+            		
+            	}catch(InputMismatchException e) {
             		System.out.println("Opción inválida");
+            		teclado.nextLine();
+            		return;
+            		 
             	}
                 switch (opcion) {
                     case 1:
@@ -139,16 +148,12 @@ public class taller_2 {
 
 	public static void kcalPorUsuario() {
 		for (int i = 0; i < cantidadParticipantes; i++) {
-			String nombreBuscado=nombreParticipantes[i];
-			Choripan[] chor=new Choripan[200];
-			Terremoto[] terremoto=new Terremoto[200];
-			if(!nombreBuscado.equalsIgnoreCase(null)) {
-				Consumidor cons=new Consumidor(nombreBuscado,chor,terremoto);
-				cons.calPerPersona(cons);
+			if(nombreParticipantes[i] == null) {
+				break;
+			}else {
+				listaConsumidor[i].calcularCalorias();
 			}
-			
 		}
-		
 	}
 
 	public static void terremotosPorUsuario() {
@@ -194,12 +199,15 @@ public class taller_2 {
 		System.out.printf(format,"Usuario","Cantidad");
 		int participantes=nombreParticipantes.length;
 		for(int i=0; i<participantes;i++) {
-			
+				
 				Choripan[] chor=new Choripan[200];
 				Terremoto[] ter=new Terremoto[200];
 				String nombres=nombreParticipantes[i];
 				//Este no funciona, por favor revisar
-				if(!nombres.isEmpty() )  {
+				if(nombreParticipantes == null) {
+					continue;
+				}
+				
 				cons=new Consumidor(nombres,chor,ter);
 				try {
 					cons.getCanPersonaChoripan();
@@ -212,7 +220,7 @@ public class taller_2 {
 			}
 		}
 		
-	}
+	
 
 	public static void terremotosTomados() {
 		gestor.getcantTerremotos();
@@ -286,11 +294,10 @@ public class taller_2 {
 		    	System.out.println("Formato no permitido");
 		    }
 		    if(num==0) {
-		    	
-		    }else {
-		    	num=num-1;
+		    	 System.out.println("Operación cancelada.");
+		    	 return;
 		    }
-		    gestor.eliminarChoripan(num);
+		    gestor.eliminarChoripan(num-1);
 		
 	}
 
@@ -308,16 +315,10 @@ public class taller_2 {
 	    	System.out.println("Formato no permitido");
 	    }
 	    if(num==0) {
-	    	
-	    }else {
-	    	num=num-1;
-	    	gestor.mostrarEditar(num,choripan,terremoto);
+	    	 System.out.println("Operación cancelada.");
+	    	 return;
 	    }
-	    
-	    
-	    	
-	   
-	    
+	    	gestor.mostrarEditar(num-1,choripan,terremoto);    
     	
     }
     public static void editarChoripan (Scanner teclado) {
@@ -430,7 +431,7 @@ public class taller_2 {
     	  double largo=0;
     	  double ancho=0;
     	  String fecha=null;
-    	    
+    	  
 
     	    System.out.println();
     	    System.out.println("Seleccione un consumidor:");
@@ -442,12 +443,35 @@ public class taller_2 {
     	    System.out.print("Ingrese una opcion: ");
     	    try {
     	    	opcionConsumidor = teclado.nextInt();
-    	    }catch(Exception e) {
+    	    	System.out.println();
+    	    }catch(InputMismatchException e) {
     	    	System.out.println("Error del formato ingresado.");
+    	    	teclado.nextInt();
+    	    	return;
+    	    }
+    	    System.out.println();
+    	    while(!teclado.hasNextInt()) {
+    	    	System.out.println("Debe ingresar un número entero");
+    	    	try {
+        	    	opcionConsumidor = teclado.nextInt();
+        	    	System.out.println();
+        	    }catch(NumberFormatException e) {
+        	    	System.out.println("Error del formato ingresado.");
+        	    }
+    	    }
+    	    while(opcionConsumidor<1 || opcionConsumidor>cantidadParticipantes) {
+    	    	System.out.println("Participante no válido.");
+    	    	try {
+        	    	opcionConsumidor = teclado.nextInt();
+        	    }catch(NumberFormatException e) {
+        	    	System.out.println("Error del formato ingresado.");
+        	    }
     	    }
     	    
+    	    
+    	    
     	
-	    consumidor = nombreParticipantes[opcionConsumidor - 1];
+    	    consumidor = nombreParticipantes[opcionConsumidor - 1];
 	    //Agregar al nuevo choripan
 	    
 	    System.out.println("Largo del choripan (cm): ");
@@ -477,7 +501,7 @@ public class taller_2 {
 	    
 	    Choripan nuevo = new Choripan("Choripan",consumidor, fecha, largo, ancho);
 	    gestor.agregarChoripan(nuevo);
-	   
+	    
 	    
 	    
 	    System.out.println(">> Registro agregado correctamente y guardado en Consumido.txt");
@@ -492,6 +516,7 @@ public class taller_2 {
     
     public static void agregarRegistro (Scanner teclado) {
     	int eleccion=0;
+    	String aux=null;
    
     	System.out.println("Tipo de registro: ");
     	System.out.println("[1] Choripan");
@@ -500,8 +525,9 @@ public class taller_2 {
     	
      	System.out.print("Seleccione una opcion: ");
      	try {
-     		eleccion = teclado.nextInt();
-     	}catch(Exception e){
+     		aux=teclado.nextLine();
+     		eleccion = Integer.parseInt(aux);
+     	}catch(InputMismatchException e){
      		System.out.println("Error al ingresar el formato del dato");
      	}
 	    
@@ -526,6 +552,7 @@ public class taller_2 {
     }
     
     public static void actualizarRegistros (Scanner teclado) {
+    	String aux=null;
     	int opcion=0;
     	System.out.println("============ ACTUALIZAR REGISTROS =================");
     	System.out.println("[1] Agregar");
@@ -536,8 +563,9 @@ public class taller_2 {
     	
 	   	System.out.print("Seleccione una opcion: ");
 	   	try {
-	    opcion = teclado.nextInt();
-	   	}catch(Exception e) {
+	   	aux=teclado.nextLine();
+	    opcion = Integer.parseInt(aux);
+	   	}catch(InputMismatchException e) {
 	   		System.out.println("");
 	   	}
 	    switch (opcion) {
@@ -562,7 +590,7 @@ public class taller_2 {
     
     public static void verRegistros (Scanner teclado) {
     	int opcion=0;
-    	
+    	String aux=null;
     	System.out.println("============ VER REGISTROS =================");
     	System.out.println("[1] Choripanes");
     	System.out.println("[2] Terremotos");
@@ -571,9 +599,12 @@ public class taller_2 {
     	
     	 System.out.print("Seleccione una opcion: ");
     	 try {
-	     opcion = teclado.nextInt();
-    	 }catch(Exception e) {
+    	 aux= teclado.nextLine();
+	     opcion = Integer.parseInt(aux);
+    	 }catch(InputMismatchException e) {
     		 System.out.println("Fallo.Formato ingresado no válido. ");
+    		 teclado.nextLine();
+ 	        return;
     	 }
 	     switch (opcion) {
 	     case 1:
@@ -648,11 +679,14 @@ public static void leerConsumidos() {
 
             } catch (NumberFormatException e) {
                 System.out.println("Numero invalido en: " + linea);
+                teclado.nextLine();
+    	        return;
             }
         }
 
     } catch (FileNotFoundException e) {
         System.out.println("No se encontro Consumidos.txt");
+        teclado.nextLine();
         return;
     }
 
@@ -678,11 +712,14 @@ public static void leerConsumidos() {
 	
 	            if (!linea.isEmpty()) {
 	                nombreParticipantes[cantidadParticipantes] = linea;
+	                Consumidor cons=new Consumidor(nombreParticipantes[cantidadParticipantes],null,null);
+	                listaConsumidor[cantidadParticipantes]=cons;
 	                cantidadParticipantes++;
 	            }
 	        }
 	    } catch (FileNotFoundException e) {
 	        System.out.println("No se encontro Participantes.txt");
+	        teclado.nextLine();
 	        return;
 	    }
 	
