@@ -19,7 +19,7 @@ public class GestorConsumo {
     }
     
     
-    public boolean agregarChoripan(Choripan choripan) {
+    public boolean agregarChoripan(Choripan choripan) {//Llenar lista de choripanes
     	 
         if (cantidadChoripanes < 200) {
             choripanes[cantidadChoripanes] = choripan;
@@ -29,7 +29,7 @@ public class GestorConsumo {
         return false;
     }
     
-    public boolean agregarTerremoto(Terremoto terremoto) {
+    public boolean agregarTerremoto(Terremoto terremoto) {//LLenar lista de terremotos
         if (cantidadTerremotos < 200) {
             terremotos[cantidadTerremotos] = terremoto;
             cantidadTerremotos++;
