@@ -2,17 +2,8 @@
 //Valentina Castillo - 15.166.692-2 - ITI
 package taller2;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
-
-
 public class taller_2 {
-	static private Consumidor[] listaConsumidor=new Consumidor[200];
+	static  Consumidor[] listaConsumidor=new Consumidor[200];
 	static GestorConsumo gestor = new GestorConsumo();
 
     static String[] nombreParticipantes = new String[200];
@@ -48,10 +39,11 @@ public class taller_2 {
             	try {
             		aux = teclado.nextLine();
             		opcion=Integer.parseInt(aux);
-            		teclado.nextLine();
+            		System.out.println("\n");
             		
             	}catch(InputMismatchException e) {
             		System.out.println("Opción inválida");
+            		System.out.println("Presione nuevamente enter");
             		teclado.nextLine();
             		return;
             		 
@@ -83,7 +75,7 @@ public class taller_2 {
                     "Error debe ingresar un numero entero."
                 );
 
-                teclado.nextLine();
+               
                 opcion = 0;
             }
 
@@ -142,7 +134,14 @@ public class taller_2 {
 	}
 
 	public static void diasEbrioUsuario() {
-		// TODO Auto-generated method stub
+		System.out.println("========= DIAS EBRIO POR USUARIO ===========");
+		
+		System.out.println("Cantidad días Borrachos: ");
+		for (int i = 0; i < cantidadParticipantes; i++) {
+			
+			
+			gestor.diasBorrachos(listaConsumidor[i]);
+		}
 		
 	}
 
@@ -171,8 +170,8 @@ public class taller_2 {
 				Choripan[] chor=new Choripan[200];
 				Terremoto[] ter=new Terremoto[200];
 				String nombres=nombreParticipantes[i];
-				//Este no funciona, por favor revisar
-				if(!nombres.isEmpty() )  {
+				
+				if(nombres ==null )  {
 				cons=new Consumidor(nombres,chor,ter);
 				try {
 					cons.getCanPersonaTerremoto();
@@ -426,22 +425,30 @@ public class taller_2 {
 	    // Falta validar datos 
     }
     public static void agregarChoripan (Scanner teclado) {
-    	  String consumidor=null;
-    	  int opcionConsumidor=0;
-    	  double largo=0;
-    	  double ancho=0;
-    	  String fecha=null;
+    	
+    	String consumidor=null;
+		int opcionConsumidor=0;
+		double largo=0;
+		double ancho=0;
+		String fecha=null;
     	  
 
-    	    System.out.println();
-    	    System.out.println("Seleccione un consumidor:");
-    	    
-    	    for (int i = 0; i < cantidadParticipantes; i++) {
-    	        System.out.println("[" + (i + 1) + "] " + nombreParticipantes[i]);
-    	    }
-    	    
-    	    System.out.print("Ingrese una opcion: ");
-    	    try {
+	    System.out.println();
+	    System.out.println("Seleccione un consumidor:");
+	    
+	    for (int i = 0; i < cantidadParticipantes; i++) {
+	    	
+	        System.out.println("[" + (i + 1) + "] " + nombreParticipantes[i]);
+	    }
+	    
+	    System.out.print("Ingrese una opcion: ");
+	    System.out.println();
+	    
+	    while(!teclado.hasNextInt() || opcionConsumidor<1 || opcionConsumidor>cantidadParticipantes) {
+	    	
+	    	try {
+	    		System.out.print("Ingrese nuevamente un numero: ");
+	    		
     	    	opcionConsumidor = teclado.nextInt();
     	    	System.out.println();
     	    }catch(InputMismatchException e) {
@@ -449,29 +456,29 @@ public class taller_2 {
     	    	teclado.nextInt();
     	    	return;
     	    }
-    	    System.out.println();
-    	    while(!teclado.hasNextInt()) {
-    	    	System.out.println("Debe ingresar un número entero");
-    	    	try {
-        	    	opcionConsumidor = teclado.nextInt();
-        	    	System.out.println();
-        	    }catch(NumberFormatException e) {
-        	    	System.out.println("Error del formato ingresado.");
-        	    }
+	    }
+	    System.out.println("opcionConsumidor = " + opcionConsumidor);
+	    System.out.println("cantidadParticipantes = " + cantidadParticipantes);
+	    while(opcionConsumidor<1 || opcionConsumidor>cantidadParticipantes) {
+	    	System.out.println(opcionConsumidor);
+	    	System.out.println("Participante no válido.");
+	    	System.out.println(opcionConsumidor);
+	    	try {
+	    		
+    	    	opcionConsumidor = teclado.nextInt();
+    	    	System.out.println();
+    	    }catch(NumberFormatException e) {
+    	    	System.out.println("Error del formato ingresado.");
+    	    	teclado.nextInt();
+    	    	return;
     	    }
-    	    while(opcionConsumidor<1 || opcionConsumidor>cantidadParticipantes) {
-    	    	System.out.println("Participante no válido.");
-    	    	try {
-        	    	opcionConsumidor = teclado.nextInt();
-        	    }catch(NumberFormatException e) {
-        	    	System.out.println("Error del formato ingresado.");
-        	    }
-    	    }
-    	    
-    	    
-    	    
-    	
-    	    consumidor = nombreParticipantes[opcionConsumidor - 1];
+	    }
+	    
+	    
+	    
+	    opcionConsumidor--;
+	    
+	    consumidor = nombreParticipantes[opcionConsumidor];
 	    //Agregar al nuevo choripan
 	    
 	    System.out.println("Largo del choripan (cm): ");
@@ -529,6 +536,8 @@ public class taller_2 {
      		eleccion = Integer.parseInt(aux);
      	}catch(InputMismatchException e){
      		System.out.println("Error al ingresar el formato del dato");
+     		teclado.nextLine();
+	        return;
      	}
 	    
 	    switch (eleccion) {
@@ -566,7 +575,10 @@ public class taller_2 {
 	   	aux=teclado.nextLine();
 	    opcion = Integer.parseInt(aux);
 	   	}catch(InputMismatchException e) {
-	   		System.out.println("");
+	   		System.out.println("Error al ingresar alternativas");
+	   		teclado.nextLine();
+	        return;
+	   		
 	   	}
 	    switch (opcion) {
 	        case 1:
@@ -604,7 +616,7 @@ public class taller_2 {
     	 }catch(InputMismatchException e) {
     		 System.out.println("Fallo.Formato ingresado no válido. ");
     		 teclado.nextLine();
- 	        return;
+ 	         return;
     	 }
 	     switch (opcion) {
 	     case 1:
