@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 
 
-public class taller_2 {
+public class taller_2 {//Instanciar elementos y objetos a ocupar.
 	static  Consumidor[] listaConsumidor=new Consumidor[200];
 	static GestorConsumo gestor = new GestorConsumo();
 
@@ -31,7 +31,7 @@ public class taller_2 {
         menu();
     }
 
-    public static void menu() {
+    public static void menu() {//Crear menu principal. 
         
         int opcion=0;
         String aux=null;
@@ -60,18 +60,18 @@ public class taller_2 {
             		 
             	}
                 switch (opcion) {
-                    case 1:
+                    case 1://Ver registros.
                         verRegistros(teclado);
                         break;
-                    case 2:
+                    case 2://Cambios en los txt
                     	actualizarRegistros (teclado);
                         break;
 
-                    case 3:
+                    case 3://Calcular características de los datos
                         calcularmetricas(teclado);
                         break;
 
-                    case 4:
+                    case 4://Salir del mapa.
                         System.out.println("Saliendo...");
                         break;
 
@@ -118,24 +118,24 @@ public class taller_2 {
     	}
     	switch(num) {
     	case 1:
-    		choripanesComidos();
+    		choripanesComidos();//contar los choripados comidos 
     		break;
     	
     	case 2:
-    		terremotosTomados();
+    		terremotosTomados();//contar los terremotos tomados
     		break;
     	case 3:
-    		choripanesPorUsuario();
+    		choripanesPorUsuario();//choripanes por usuario
     		break;
     	case 4:
-    		terremotosPorUsuario();
+    		terremotosPorUsuario();//contar terremotos por usuarios.
     		break;
     		
     	case 5:
     		kcalPorUsuario();
     		break;
     	case 6:
-    		diasEbrioUsuario();
+    		diasEbrioUsuario();//mostrar los dias ebrios por usuarios.
     		break;
     	}	
 		}while(num!=7) ;
