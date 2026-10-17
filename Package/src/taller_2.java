@@ -3,6 +3,7 @@
 package taller2;
 
 public class taller_2 {
+	//Crear listas de consumidor, cantidad de participantes e instanciar GestorConsumo y el scanner.
 	static  Consumidor[] listaConsumidor=new Consumidor[200];
 	static GestorConsumo gestor = new GestorConsumo();
 
@@ -12,11 +13,13 @@ public class taller_2 {
     
 
     public static void main(String[] args) {
+		//Se serciora que existan los archivos txt.
     	System.out.println("Carpeta de trabajo: " + System.getProperty("user.dir"));
     	System.out.println("Existe Participantes.txt: "
     	        + new File("Participantes.txt").exists());
     	System.out.println("Existe Consumido.txt: "
     	        + new File("Consumido.txt").exists());
+		//Se llenan las listas de participantes, choripanes y terremotos, instanciandolos.
     	leerParticipantes();
 	    leerConsumidos();
         menu();
