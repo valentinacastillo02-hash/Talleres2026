@@ -1,11 +1,7 @@
 package taller2;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.Iterator;
-import java.util.Scanner;
-
 public class GestorConsumo {
+	
 	private Choripan[] choripanes;
     private Terremoto[] terremotos;
 
@@ -72,7 +68,7 @@ public class GestorConsumo {
   
     public void mostrarTerremotos() {
     		double totallitros = 0;
-    		
+    		try {
     	    System.out.println();
     	    System.out.println("=============== TERREMOTOS =================");
     	    System.out.printf("%-4s %-13s %-8s %-12s %s%n",
@@ -94,7 +90,11 @@ public class GestorConsumo {
     	            + " terremotos registrados");
     	    System.out.printf("Total de litros: %.2f L%n", totallitros);
     	    System.out.println("=============================================");
-    	} // Faltan los litros 
+    		}catch(Exception e) {
+    			System.out.println("Error al mostrar el archivo.");
+    			return;
+    		}
+    	} 
     
    public  void sobreEscriubir(String string,boolean chor,boolean ter) {
 		int contador=0;
@@ -119,7 +119,8 @@ public class GestorConsumo {
 		
 			cr.close();
 		}catch(Exception e) {
-			System.out.println("Error.El Archivo txt no es compatible. ");
+			System.out.println("Error.El Archivo txt no puede ser leido. ");
+			return;
 		}
 		
    	}
@@ -310,10 +311,69 @@ public class GestorConsumo {
 	   System.out.println("La cantidad total de Terremotos son "+cantidadTerremotos);
 	
    		}
+
+
+  
+public void diasBorrachos(Consumidor consumidor) {
+	   int cantDias=0;
+	   
+	   double cantGuardada=0;
+	   for (int i = 0; i < cantidadTerremotos; i++) {
+		   
+		   String  fechaBorracho=terremotos[i].getFecha();
+		   boolean revisado=false;
+		   if(consumidor.getNombre().equalsIgnoreCase(terremotos[i].getConsumidor())) {
+		   for (int j = 0; j < i; j++) {
+			   if(terremotos[j].getFecha().equals(fechaBorracho)) {
+				   revisado=true;
+				   break;
+			   }
+		}
+		   if(!revisado) {
+			   cantGuardada=cantLitros(fechaBorracho);
+			   if(cantGuardada>=2.0) {
+				   
+				   cantDias++;
+				   
+			   }
+			   
+		   }
+		   
+		  
+		   	}
+		   
+	   }
+	   String format="%-15s %-15s %-15s %n"; 
+	   System.out.printf(format,consumidor.getNombre(),cantDias,cantGuardada);
+	   
+		
+	}
+   
+   public double cantLitros(String fechaBorracho) {
+		double totalLitros=0;
+		
+		for (int i = 0; i < cantidadTerremotos; i++) {
+			if(terremotos[i].getFecha().equalsIgnoreCase(fechaBorracho)){
+				totalLitros+=terremotos[i].getLitros();
+				if(totalLitros>2) {
+					
+					
+				}
+			}
+			
+		}
+		return totalLitros;
+		
+		
+		}
+		
+	
+  
    
    }
 	
     
+
 
 
 
