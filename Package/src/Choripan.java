@@ -6,6 +6,7 @@ public  class Choripan {
 	private double ancho;
 	private String fecha;
 	private String consumidor;
+	
 
     // Constructor
     public Choripan(String choripan,String consumidor, String fecha,double largo, double ancho) {
@@ -30,7 +31,7 @@ public  class Choripan {
     public double getAncho() {
     	return ancho;
     }
-    public void setLargo(double largo) { // modifica 
+    public void setLargo(double largo) { 
         if (largo > 0) {
             this.largo = largo;
         }
@@ -53,10 +54,5 @@ public  class Choripan {
 	}
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
-	}
-       
+	}       
 }
-
-
-
-
