@@ -2,8 +2,8 @@ package taller2;
 
 public class GestorConsumo {
 	
-	private Choripan[] choripanes;
-    private Terremoto[] terremotos;
+	private Choripan[] choripanes;//Crear lista de choripanes
+    private Terremoto[] terremotos;//Crear lista de terremotos.
 
     private int cantidadChoripanes;
     private int cantidadTerremotos;
