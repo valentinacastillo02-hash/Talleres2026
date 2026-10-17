@@ -2,8 +2,16 @@
 //Valentina Castillo - 15.166.692-2 - ITI
 package taller2;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+
+
 public class taller_2 {
-	//Crear listas de consumidor, cantidad de participantes e instanciar GestorConsumo y el scanner.
 	static  Consumidor[] listaConsumidor=new Consumidor[200];
 	static GestorConsumo gestor = new GestorConsumo();
 
@@ -13,13 +21,11 @@ public class taller_2 {
     
 
     public static void main(String[] args) {
-		//Se serciora que existan los archivos txt.
     	System.out.println("Carpeta de trabajo: " + System.getProperty("user.dir"));
     	System.out.println("Existe Participantes.txt: "
     	        + new File("Participantes.txt").exists());
     	System.out.println("Existe Consumido.txt: "
     	        + new File("Consumido.txt").exists());
-		//Se llenan las listas de participantes, choripanes y terremotos, instanciandolos.
     	leerParticipantes();
 	    leerConsumidos();
         menu();
@@ -436,7 +442,7 @@ public class taller_2 {
 		double largo=0;
 		double ancho=0;
 		String fecha=null;
-    	  
+    	String aux="";
 
 	    System.out.println();
 	    System.out.println("Seleccione un consumidor:");
@@ -454,9 +460,11 @@ public class taller_2 {
 	    	try {
 	    		System.out.print("Ingrese nuevamente un numero: ");
 	    		
-    	    	opcionConsumidor = teclado.nextInt();
-    	    	System.out.println();
-    	    }catch(InputMismatchException e) {
+	    		 aux = teclado.nextLine();
+	       		System.out.println("Presione enter");
+	       		opcionConsumidor=Integer.parseInt(aux);
+	       		teclado.nextLine();
+    	    }catch(Exception e) {
     	    	System.out.println("Error del formato ingresado.");
     	    	teclado.nextInt();
     	    	return;
@@ -469,9 +477,10 @@ public class taller_2 {
 	    	System.out.println("Participante no válido.");
 	    	System.out.println(opcionConsumidor);
 	    	try {
-	    		
-    	    	opcionConsumidor = teclado.nextInt();
-    	    	System.out.println();
+	    		 aux = teclado.nextLine();
+		       		System.out.println("Presione enter");
+		       		opcionConsumidor=Integer.parseInt(aux);
+		       		teclado.nextLine();
     	    }catch(NumberFormatException e) {
     	    	System.out.println("Error del formato ingresado.");
     	    	teclado.nextInt();
@@ -488,7 +497,10 @@ public class taller_2 {
 	    
 	    System.out.println("Largo del choripan (cm): ");
 	    try {
-	    	largo = teclado.nextDouble();
+	    	 aux = teclado.nextLine();
+	       		System.out.println("Presione enter");
+	       		largo=Double.parseDouble(aux);
+	       		teclado.nextLine();
 	    }catch(Exception e) {
 	    	System.out.println("Error. El formato no es correcto");
 	    }
@@ -496,7 +508,10 @@ public class taller_2 {
 	    System.out.println("ancho del choripan(cm): ");
 	    
 	    try {
-	    	ancho = teclado.nextDouble();
+	    	aux = teclado.nextLine();
+       		System.out.println("Presione enter");
+       		ancho=Double.parseDouble(aux);
+       		teclado.nextLine();
 	    }catch(Exception e) {
 	    	System.out.println("Error. El formato no es correcto");
 	    }
@@ -506,6 +521,10 @@ public class taller_2 {
 	    teclado.nextLine();
 	    try {
 	    	fecha  = teclado.nextLine();
+       		System.out.println("Presione enter");
+       		
+       		teclado.nextLine();
+	    	
 	    }catch(Exception e) {
 	    	System.out.println("Error. El formato no es correcto");
 	    }
@@ -537,8 +556,10 @@ public class taller_2 {
     	
      	System.out.print("Seleccione una opcion: ");
      	try {
-     		aux=teclado.nextLine();
-     		eleccion = Integer.parseInt(aux);
+     		 aux = teclado.nextLine();
+      		System.out.println("Presione enter");
+      		eleccion=Integer.parseInt(aux);
+      		teclado.nextLine();
      	}catch(InputMismatchException e){
      		System.out.println("Error al ingresar el formato del dato");
      		teclado.nextLine();
@@ -577,12 +598,13 @@ public class taller_2 {
     	
 	   	System.out.print("Seleccione una opcion: ");
 	   	try {
-	   	aux=teclado.nextLine();
-	    opcion = Integer.parseInt(aux);
-	   	}catch(InputMismatchException e) {
+	   		aux = teclado.nextLine();
+    		System.out.println("Presione enter");
+    		opcion=Integer.parseInt(aux);
+    		teclado.nextLine();
+	   	}catch(Exception e) {
 	   		System.out.println("Error al ingresar alternativas");
-	   		teclado.nextLine();
-	        return;
+	   		
 	   		
 	   	}
 	    switch (opcion) {
@@ -616,12 +638,14 @@ public class taller_2 {
     	
     	 System.out.print("Seleccione una opcion: ");
     	 try {
-    	 aux= teclado.nextLine();
-	     opcion = Integer.parseInt(aux);
-    	 }catch(InputMismatchException e) {
+    		 aux = teclado.nextLine();
+     		System.out.println("Presione enter");
+     		opcion=Integer.parseInt(aux);
+     		teclado.nextLine();
+     		
+    	 }catch(Exception e) {
     		 System.out.println("Fallo.Formato ingresado no válido. ");
-    		 teclado.nextLine();
- 	         return;
+    		 
     	 }
 	     switch (opcion) {
 	     case 1:
