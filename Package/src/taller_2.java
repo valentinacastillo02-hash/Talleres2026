@@ -38,17 +38,19 @@ public class taller_2 {
             System.out.println("[4] Salir");
             System.out.print("Seleccione una opcion: ");
 
-            if (teclado.hasNextInt()) {
+            if (opcion== 0) {
             	try {
             		aux = teclado.nextLine();
+            		System.out.println("Presione enter");
             		opcion=Integer.parseInt(aux);
-            		System.out.println("\n");
+            		teclado.nextLine();
             		
-            	}catch(InputMismatchException e) {
+            		
+            	}catch(Exception e) {
             		System.out.println("Opción inválida");
             		System.out.println("Presione nuevamente enter");
-            		teclado.nextLine();
-            		return;
+            		
+            		
             		 
             	}
                 switch (opcion) {
