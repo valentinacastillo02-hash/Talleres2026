@@ -10,10 +10,10 @@ public class Consumidor {
 	public String toString() {
 		return "Consumidor [nombre=" + nombre + "]";
 	}
-	private Choripan[] listaChorip=new Choripan[200];
-	private Terremoto[] listaterremoto=new Terremoto[200];
+	private Choripan[] listaChorip=new Choripan[200];//Crear lista de choripanes
+	private Terremoto[] listaterremoto=new Terremoto[200];//Crear lista de terremotos
 	
-	public Consumidor(String nombre, Choripan[] listaChorip, Terremoto[] listaterremoto) {
+	public Consumidor(String nombre, Choripan[] listaChorip, Terremoto[] listaterremoto) {//Constructor 
 		
 		this.nombre = nombre;
 		
@@ -23,16 +23,16 @@ public class Consumidor {
 	int cantCho =0;
 	int cantTerr=0;
 	int calorias=0;
-	public String getNombre() {
+	public String getNombre() {//obtener  nombre
 		return nombre;
 	}
-	public int getCantCho() {
+	public int getCantCho() {//obtener cantidad choripanes.
 		return cantCho;
 	}
-	public int getCantTerr() {
+	public int getCantTerr() {//obtener cantidad terremoto
 		return cantTerr;
 	}
-	public void getCanPersonaChoripan() throws FileNotFoundException {
+	public void getCanPersonaChoripan() throws FileNotFoundException {//Obtener choripanes por persona
 		File file=new File("Consumido.txt");
 		Scanner scan=new Scanner(file);
 		
@@ -75,7 +75,7 @@ public class Consumidor {
 	public void setListaterremoto(Terremoto[] listaterremoto) {
 		this.listaterremoto = listaterremoto;
 	}
-	public void getCanPersonaTerremoto() {
+	public void getCanPersonaTerremoto() {//Obtener terremotos por personas
 		Scanner scan=null;
 		
 		File file=new File("Consumido.txt");
@@ -106,7 +106,7 @@ public class Consumidor {
 		System.out.printf(format,this.nombre,cantTerr);
 		
 	}
-	public void calcularCalorias() {
+	public void calcularCalorias() {//Calculo de caloróias
 		String format="%-15s %-15s %n";
 		for (int i = 0; i < listaChorip.length; i++) {
 			if(listaChorip[i] == null) {
@@ -126,19 +126,9 @@ public class Consumidor {
 				if(listaterremoto[i].getConsumidor().equalsIgnoreCase(nombre) ) {
 					double calculo=(listaterremoto[i].getLitros()*10)/3;
 					calorias+=calculo;
+					}
 				}
 			}
 		}
-		
-		
-		
-		
-	}
 	
 	}
-	
-	
-	
-	
-
-
