@@ -44,5 +44,7 @@ public class Terremoto {
 	public void setConsumidor(String consumidor) {
 		this.consumidor = consumidor;
 	}
+	
     
 }
+
