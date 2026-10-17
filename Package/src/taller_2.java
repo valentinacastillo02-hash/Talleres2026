@@ -560,7 +560,7 @@ public class taller_2 {
       		System.out.println("Presione enter");
       		eleccion=Integer.parseInt(aux);
       		teclado.nextLine();
-     	}catch(InputMismatchException e){
+     	}catch(NumberFormatException e){
      		System.out.println("Error al ingresar el formato del dato");
      		teclado.nextLine();
 	        return;
